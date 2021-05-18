@@ -1,0 +1,72 @@
+﻿@model IEnumerable<_20210504MVC001.Models.Employee>
+
+@{
+    ViewBag.Title = "員工資料表";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("新增員工", "Create")
+</p>
+<table class="table table-striped">
+    <tr>
+        <th>
+            員工姓名
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.emp003)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.emp004)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.emp005)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.emp008)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee2.emp002)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmpTitle.emptitle_002)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.emp002)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.emp003)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.emp004)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.emp005)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.emp008)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee2.emp002)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmpTitle.emptitle_002)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.emp001 }) |
+            @Html.ActionLink("Details", "Details", new { id=item.emp001 }) |
+            @Html.ActionLink("刪除", "Delete", new { id=item.emp001 }, new { onclick = "return confirm(' 確定刪除嗎?')" })
+   
+        </td>
+    </tr>
+}
+
+</table>
