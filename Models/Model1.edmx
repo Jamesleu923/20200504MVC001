@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MYDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="emp001" />
+          </Key>
+          <Property Name="emp001" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="emp002" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="emp003" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="emp004" Type="nchar" MaxLength="2" Nullable="false" />
+          <Property Name="emp005" Type="smalldatetime" Nullable="false" />
+          <Property Name="emp006" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="emp007" Type="image" />
+          <Property Name="emp008" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="emp009" Type="int" />
+        </EntityType>
+        <EntityType Name="EmpTitle">
+          <Key>
+            <PropertyRef Name="emptitle_001" />
+          </Key>
+          <Property Name="emptitle_000" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="emptitle_001" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="emptitle_002" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Employee_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Employee1" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="emp001" />
+            </Principal>
+            <Dependent Role="Employee1">
+              <PropertyRef Name="emp009" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_EmpTitle">
+          <End Role="EmpTitle" Type="Self.EmpTitle" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpTitle">
+              <PropertyRef Name="emptitle_001" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="emp006" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MYDBModelStoreContainer">
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmpTitle" EntityType="Self.EmpTitle" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Employee_Employee" Association="Self.FK_Employee_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Employee1" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_EmpTitle" Association="Self.FK_Employee_EmpTitle">
+            <End Role="EmpTitle" EntitySet="EmpTitle" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MYDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="emp001" />
+          </Key>
+          <Property Name="emp001" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="emp002" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="emp003" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="emp004" Type="String" MaxLength="2" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="emp005" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="emp006" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="emp007" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="emp008" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="emp009" Type="Int32" />
+          <NavigationProperty Name="Employee1" Relationship="Self.FK_Employee_Employee" FromRole="Employee" ToRole="Employee1" />
+          <NavigationProperty Name="Employee2" Relationship="Self.FK_Employee_Employee" FromRole="Employee1" ToRole="Employee" />
+          <NavigationProperty Name="EmpTitle" Relationship="Self.FK_Employee_EmpTitle" FromRole="Employee" ToRole="EmpTitle" />
+        </EntityType>
+        <EntityType Name="EmpTitle">
+          <Key>
+            <PropertyRef Name="emptitle_001" />
+          </Key>
+          <Property Name="emptitle_000" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="emptitle_001" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="emptitle_002" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Employee_EmpTitle" FromRole="EmpTitle" ToRole="Employee" />
+        </EntityType>
+        <Association Name="FK_Employee_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Employee1" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="emp001" />
+            </Principal>
+            <Dependent Role="Employee1">
+              <PropertyRef Name="emp009" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_EmpTitle">
+          <End Role="EmpTitle" Type="Self.EmpTitle" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpTitle">
+              <PropertyRef Name="emptitle_001" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="emp006" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MYDBEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Employee" EntityType="Self.Employee" />
+          <EntitySet Name="EmpTitle" EntityType="Self.EmpTitle" />
+          <AssociationSet Name="FK_Employee_Employee" Association="Self.FK_Employee_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Employee1" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_EmpTitle" Association="Self.FK_Employee_EmpTitle">
+            <End Role="EmpTitle" EntitySet="EmpTitle" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MYDBModelStoreContainer" CdmEntityContainer="MYDBEntities2">
+          <EntitySetMapping Name="Employee">
+            <EntityTypeMapping TypeName="MYDBModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="emp001" ColumnName="emp001" />
+                <ScalarProperty Name="emp002" ColumnName="emp002" />
+                <ScalarProperty Name="emp003" ColumnName="emp003" />
+                <ScalarProperty Name="emp004" ColumnName="emp004" />
+                <ScalarProperty Name="emp005" ColumnName="emp005" />
+                <ScalarProperty Name="emp006" ColumnName="emp006" />
+                <ScalarProperty Name="emp007" ColumnName="emp007" />
+                <ScalarProperty Name="emp008" ColumnName="emp008" />
+                <ScalarProperty Name="emp009" ColumnName="emp009" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmpTitle">
+            <EntityTypeMapping TypeName="MYDBModel.EmpTitle">
+              <MappingFragment StoreEntitySet="EmpTitle">
+                <ScalarProperty Name="emptitle_000" ColumnName="emptitle_000" />
+                <ScalarProperty Name="emptitle_001" ColumnName="emptitle_001" />
+                <ScalarProperty Name="emptitle_002" ColumnName="emptitle_002" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="無" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
